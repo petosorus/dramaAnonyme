@@ -60,7 +60,7 @@ def parsing_dm_list(dm_list):
 	for dm in dm_list:
 		if not is_direct_mention(dm.text):
 			dm_list_copy.append(dm)
-	
+	return dm_list_copy
 	
 if __name__ == "__main__":
 	#retCode = daemonize()
