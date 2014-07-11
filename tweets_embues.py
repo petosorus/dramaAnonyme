@@ -116,7 +116,6 @@ if __name__ == "__main__":
 				api.update_status(picked_dm.text)
 				
 				last_dm_id = dms[len(dms) - 1].id
-				erasing_last_dm_batch(last_dm_id)
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
@@ -124,6 +123,7 @@ if __name__ == "__main__":
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
+				erasing_last_dm_batch(last_dm_id)
 				dms = parsing_dm_list(dms)
 				
 			except tweepy.error.TweepError:pass
