@@ -77,7 +77,7 @@ if __name__ == "__main__":
 			print "sleeping"
 			sleep(1800)
 		
-			if len(dms) > 0:
+			if len(dms) != 0:
 				print "Picking dm"
 				picked_dm = dms[randrange(len(dms))]
 				dms.remove(picked_dm)
