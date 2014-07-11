@@ -6,6 +6,7 @@ import os
 from time import sleep
 from random import randrange
 import re
+from time import localtime
 
 def file_to_dict(file_name):
 	"""opens a file and put tab separated values in a dict"""
@@ -66,6 +67,10 @@ def parsing_dm_list(dm_list):
 			dm_list_copy.append(dm)
 	return dm_list_copy
 	
+def display_time():
+	time = localtime()
+	return str(time[3]) + "h" + str(time[4]) + "min"
+	
 if __name__ == "__main__":
 	#retCode = daemonize()
 	cur_dir = os.path.dirname(os.path.realpath(__file__))
@@ -85,7 +90,7 @@ if __name__ == "__main__":
 						follower.follow()
 					except tweepy.error.TweepError:pass
 			
-			print "sleeping before tweeting"
+			print "sleeping before tweeting : " + display_time()
 			sleep(1800)
 		
 			if len(dms) != 0:
@@ -99,7 +104,7 @@ if __name__ == "__main__":
 				last_dm_id = dms[len(dms) - 1]	
 				first_dm_id = last_dm_id
 
-			print "sleeping before following"
+			print "sleeping before following : " + display_time()
 			sleep(1800)
 			
 			try:
