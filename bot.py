@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import tweepy
 import os
 from time import sleep
@@ -75,7 +78,8 @@ if __name__ == "__main__":
 				if not follower.following:
 					try:
 						follower.follow()
-					except tweepy.error.TweepError:pass
+					except tweepy.error.TweepError:
+						print "Demande déjà faite"
 			
 			print "sleeping"
 			sleep(1800)
