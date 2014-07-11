@@ -53,8 +53,7 @@ if __name__ == "__main__":
 	
 	api = twitter_authentification(cur_dir + "/keys.conf")
 	dms = api.direct_messages()
-	first_dm_id = dms[0].id
-	start = 0
+
 	while 1:
 		try:
 			print "Follow back"
@@ -70,7 +69,7 @@ if __name__ == "__main__":
 				print "Picking dm"
 				picked_dm = dms[randrange(len(dms))]
 				dms.remove(picked_dm)
-				api.destroy_direct_message(picked_dm.id)
+				#api.destroy_direct_message(picked_dm.id)
 				print picked_dm.text
 				api.update_status(picked_dm.text)
 				
