@@ -73,7 +73,7 @@ def display_time():
 	
 def logging_tweets(dm):
 	f = open("tweets.log", 'a')
-	f.write(dm.text + "\t" + dm.sender.screen_name)
+	f.write(dm.text + "\t" + dm.sender.screen_name + "\t" + display_time())
 	f.close()
 	
 if __name__ == "__main__":
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 					except tweepy.error.TweepError:pass
 			
 			print "sleeping before tweeting : " + display_time()
-			sleep(1800)
+			sleep(900)
 		
 			if len(dms) != 0:
 				print "Picking dm"
@@ -111,7 +111,7 @@ if __name__ == "__main__":
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
-			sleep(1800)
+			sleep(900)
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
