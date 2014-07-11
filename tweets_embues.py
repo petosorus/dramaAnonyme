@@ -105,8 +105,8 @@ if __name__ == "__main__":
 				print picked_dm.text
 				api.update_status(picked_dm.text)
 				
-				last_dm_id = dms[len(dms) - 1].id
-				first_dm_id = last_dm_id
+			last_dm_id = dms[len(dms) - 1].id
+			first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
 			sleep(600)
