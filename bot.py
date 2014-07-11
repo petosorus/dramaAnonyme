@@ -54,11 +54,15 @@ def daemonize():
 def is_direct_mention(text):
 	pattern_direct_mention = re.compile("^@.+")
 	return re.match(pattern_direct_mention, text)
+	
+def contains_link(text):
+	pattern_link = re.compile(".*?http.*?")
+	return re.match(pattern_link, text)
 
 def parsing_dm_list(dm_list):
 	dm_list_copy = []
 	for dm in dm_list:
-		if not is_direct_mention(dm.text):
+		if not is_direct_mention(dm.text) and not contains_link(dm.text):
 			dm_list_copy.append(dm)
 	return dm_list_copy
 	
