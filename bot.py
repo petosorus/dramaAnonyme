@@ -57,14 +57,17 @@ if __name__ == "__main__":
 	start = 0
 	while 1:
 		try:
+			print "Follow back"
 			followers = api.followers()				
 			for follower in followers:
 				if not follower.following:
 					follower.follow()
-	
+			
+			print "sleeping"
+			sleep(1800)
 		
 			if len(dms) > 0:
-				print "picking dm"
+				print "Picking dm"
 				picked_dm = dms[randrange(len(dms))]
 				dms.remove(picked_dm)
 				api.destroy_direct_message(picked_dm.id)
@@ -75,7 +78,7 @@ if __name__ == "__main__":
 				first_dm_id = last_dm_id
 
 			print "sleeping"
-			sleep(3600)
+			sleep(1800)
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
