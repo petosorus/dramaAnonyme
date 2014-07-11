@@ -71,6 +71,11 @@ def display_time():
 	time = localtime()
 	return str(time[3]) + "h" + str(time[4]) + "min"
 	
+def logging_tweets(dm):
+	f = open("tweets.log", 'a')
+	f.write(dm.text + "\t" + dm.sender.screen_name)
+	f.close()
+	
 if __name__ == "__main__":
 	#retCode = daemonize()
 	cur_dir = os.path.dirname(os.path.realpath(__file__))
@@ -96,6 +101,7 @@ if __name__ == "__main__":
 			if len(dms) != 0:
 				print "Picking dm"
 				picked_dm = dms[randrange(len(dms))]
+				logging_tweets(picked_dm)	
 				dms.remove(picked_dm)
 				#api.destroy_direct_message(picked_dm.id)
 				print picked_dm.text
