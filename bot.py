@@ -2,6 +2,7 @@ import tweepy
 import os
 from time import sleep
 from random import randrange
+import re
 
 def file_to_dict(file_name):
 	"""opens a file and put tab separated values in a dict"""
@@ -46,6 +47,17 @@ def daemonize():
     os.dup2(0,2)
     print pid
     return(0)
+
+def is_direct_mention(text):
+	pattern_direct_mention = re.compile("^@.+")
+	return re.match(pattern_direct_mention, text)
+
+def parsing_dm_list(dm_list):
+	dm_list_copy = []
+	for dm in dm_list:
+		if not is_direct_mention(dm.text):
+			dm_list_copy.append(dm)
+	
 	
 if __name__ == "__main__":
 	#retCode = daemonize()
