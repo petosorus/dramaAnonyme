@@ -80,7 +80,7 @@ if __name__ == "__main__":
 					try:
 						follower.follow()
 					except tweepy.error.TweepError:
-						print "Demande déjà faite pour " + follower.screen_name
+						print "Demande déjà faite pour " + follower.name
 			
 			print "sleeping before tweeting"
 			sleep(1800)
