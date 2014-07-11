@@ -102,7 +102,7 @@ if __name__ == "__main__":
 					except tweepy.error.TweepError:pass
 			
 			print "sleeping before tweeting : " + display_time()
-			sleep(450)
+			sleep(600)
 		
 			if len(dms) != 0:
 				print "Picking dm"
@@ -120,7 +120,7 @@ if __name__ == "__main__":
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
-			sleep(450)
+			sleep(600)
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
