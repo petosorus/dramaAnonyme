@@ -70,18 +70,13 @@ if __name__ == "__main__":
 				api.destroy_direct_message(picked_dm.id)
 				print picked_dm.text
 				api.update_status(picked_dm.text)
-				if start < 10:
-					start += 1
 				
 				last_dm_id = dms[len(dms) - 1]	
 				first_dm_id = last_dm_id
 
 			print "sleeping"
-			if start <= 10:
-				print "lucky"
-				sleep(300)
-			else:
-				sleep(3600)
+			sleep(3600)
+			
 			try:
 				dms = api.direct_messages(first_dm_id)
 			except tweepy.error.TweepError:pass
