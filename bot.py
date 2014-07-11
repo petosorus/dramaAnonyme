@@ -67,6 +67,7 @@ if __name__ == "__main__":
 				print "picking dm"
 				picked_dm = dms[randrange(len(dms))]
 				dms.remove(picked_dm)
+				api.destroy_direct_message(picked_dm.id)
 				print picked_dm.text
 				api.update_status(picked_dm.text)
 				if start < 10:
@@ -81,9 +82,10 @@ if __name__ == "__main__":
 				sleep(300)
 			else:
 				sleep(3600)
-			dms = api.direct_messages(first_dm_id)
-		except (tweepy.error.TweepError,IndexError):pass
-	
+			try:
+				dms = api.direct_messages(first_dm_id)
+			except tweepy.error.TweepError:pass
+		except IndexError:pass
 	
 	
 	
