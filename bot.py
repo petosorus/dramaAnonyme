@@ -65,6 +65,7 @@ if __name__ == "__main__":
 	
 	api = twitter_authentification(cur_dir + "/keys.conf")
 	dms = api.direct_messages()
+	dms = parsing_dm_list(dms)
 
 	while 1:
 		try:
@@ -72,7 +73,9 @@ if __name__ == "__main__":
 			followers = api.followers()				
 			for follower in followers:
 				if not follower.following:
-					follower.follow()
+					try:
+						follower.follow()
+					except tweepy.error.TweepError:pass
 			
 			print "sleeping"
 			sleep(1800)
@@ -93,6 +96,7 @@ if __name__ == "__main__":
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
+				dms = parsing_dm_list(dms)
 			except tweepy.error.TweepError:pass
 		except IndexError:pass
 	
