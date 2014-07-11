@@ -73,7 +73,8 @@ def display_time():
 	
 def logging_tweets(dm):
 	f = open("tweets.log", 'a')
-	f.write(dm.text + "\t" + dm.sender.screen_name + "\t" + display_time())
+	f.write(dm.text.encode('utf-8') + "\t" + 
+		dm.sender.screen_name.encode('utf-8') + "\t" + display_time())
 	f.close()
 	
 if __name__ == "__main__":
