@@ -72,6 +72,7 @@ if __name__ == "__main__":
 
 	while 1:
 		try:
+			print "Nb de DM : ", len(dms)
 			print "Follow back"
 			followers = api.followers()				
 			for follower in followers:
