@@ -126,7 +126,10 @@ if __name__ == "__main__":
 			
 			try:
 				dms = api.direct_messages(first_dm_id)
-				erasing_last_dm_batch(last_dm_id)
+				try:
+					erasing_last_dm_batch(last_dm_id)
+				except NameError:
+					last_dm_id = first_dm_id
 				dms = parsing_dm_list(dms)
 				
 			except tweepy.error.TweepError:pass
