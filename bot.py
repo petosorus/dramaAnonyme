@@ -44,40 +44,45 @@ def daemonize():
     os.open("/dev/null",os.O_RDWR)
     os.dup2(0,1)
     os.dup2(0,2)
+    print pid
     return(0)
 	
-if __name__=="main":
-	retCode = daemonize()
+if __name__ == "__main__":
+	#retCode = daemonize()
 	cur_dir = os.path.dirname(os.path.realpath(__file__))
 	
 	api = twitter_authentification(cur_dir + "/keys.conf")
 	dms = api.direct_messages()
 	first_dm_id = dms[0].id
-
+	start = 0
 	while 1:
+		try:
+			followers = api.followers()				
+			for follower in followers:
+				if not follower.following:
+					follower.follow()
 	
-		for follower in followers:
-			if not follower.following:
-				follower.follow()
+		
+			if len(dms) > 0:
+				print "picking dm"
+				picked_dm = dms[randrange(len(dms))]
+				dms.remove(picked_dm)
+				print picked_dm.text
+				api.update_status(picked_dm.text)
+				if start < 10:
+					start += 1
+				
+				last_dm_id = dms[len(dms) - 1]	
+				first_dm_id = last_dm_id
 
-		dms = api.direct_messages(first_dm_id)
-		print len(dms)
-	
-	
-		if len(dms) > 0:
-			#print "picking dm"
-			picked_dm = dms[randrange(len(dms))]
-			#print picked_dm.text
-			api.update_status(picked_dm.text)
-			
-			
+			print "sleeping"
+			if start <= 10:
+				print "lucky"
+				sleep(300)
+			else:
+				sleep(3600)
 			dms = api.direct_messages(first_dm_id)
-			last_dm_id = dms[len(dms) - 1]	
-			first_dm_id = last_dm_id
-
-		#print "sleeping"
-		sleep(3600)
-	
+		except (tweepy.error.TweepError,IndexError):pass
 	
 	
 	
