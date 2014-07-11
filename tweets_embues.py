@@ -77,6 +77,11 @@ def logging_tweets(dm):
 		dm.sender.screen_name.encode('utf-8') + "\t" + display_time())
 	f.close()
 	
+def erasing_last_dm_batch(last_dm_id):
+	old_dms = api.direct_messages(0, last_dm_id)
+	for dm in old_dms:
+		api.destroy_direct_message(dm.id)
+	
 if __name__ == "__main__":
 	#retCode = daemonize()
 	cur_dir = os.path.dirname(os.path.realpath(__file__))
@@ -102,13 +107,16 @@ if __name__ == "__main__":
 			if len(dms) != 0:
 				print "Picking dm"
 				picked_dm = dms[randrange(len(dms))]
+				
 				logging_tweets(picked_dm)	
 				dms.remove(picked_dm)
 				api.destroy_direct_message(picked_dm.id)
+				
 				print picked_dm.text
 				api.update_status(picked_dm.text)
 				
-				last_dm_id = dms[len(dms) - 1]	
+				last_dm_id = dms[len(dms) - 1].id
+				erasing_last_dm_batch(last_dm_id)
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
@@ -117,6 +125,7 @@ if __name__ == "__main__":
 			try:
 				dms = api.direct_messages(first_dm_id)
 				dms = parsing_dm_list(dms)
+				
 			except tweepy.error.TweepError:pass
 		except IndexError:pass
 	
