@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
 	while 1:
 		try:
-			print "Nb de DM : ", len(dms)
+			print "Nb de DM : " + str(len(dms))
 			print "Follow back"
 			followers = api.followers()				
 			for follower in followers:
@@ -80,9 +80,9 @@ if __name__ == "__main__":
 					try:
 						follower.follow()
 					except tweepy.error.TweepError:
-						print "Demande déjà faite"
+						print "Demande déjà faite pour " + follower.screen_name
 			
-			print "sleeping"
+			print "sleeping before tweeting"
 			sleep(1800)
 		
 			if len(dms) != 0:
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 				last_dm_id = dms[len(dms) - 1]	
 				first_dm_id = last_dm_id
 
-			print "sleeping"
+			print "sleeping before following"
 			sleep(1800)
 			
 			try:
