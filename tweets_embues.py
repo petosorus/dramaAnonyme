@@ -95,10 +95,14 @@ def erasing_last_dm_batch(last_dm_id):
 
 	
 if __name__ == "__main__":
+	#Lancement
 #	retCode = daemonize()
 	cur_dir = os.path.dirname(os.path.realpath(__file__))
 	
+	#Authentification
 	api = twitter_authentification(cur_dir + "/keys.conf")
+	
+	#Initialisation
 	dms = api.direct_messages()
 	dms = parsing_dm_list(dms)
 #	first_dm_id = dms[0].id
@@ -112,12 +116,16 @@ if __name__ == "__main__":
 						7 : 200,
 						8 : 150 }
 	flag = True
-	while 1:
+	
+	#Boucle principale
+	while 1:			#Mr Fantastic Infinite Loop
 		try:
 		
 			nb_dms = len(dms)
 			print "Nb de DM : " + str(nb_dms)
-			
+
+
+			#Envoi de dm si liste non vide			
 			if nb_dms != 0 and flag:	#Flag car bug au lancement, épuisement 
 										#de tous les dm sans passer par 
 										#les sleep. Incompréhensible
@@ -140,12 +148,15 @@ if __name__ == "__main__":
 #				last_dm_id = dms[nb_dms - 1].id
 #				first_dm_id = last_dm_id
 
+
 			#Définition du temps d'attente et premier temps d'attente
 			if nb_dms >= 8:
 				nb_dms = 8
 			print display_time() + " - Time before following : " + 
 				time_dilatation[nb_dms]
+				
 			sleep(time_dilatation[nb_dms])
+		
 		
 			#Follow back des derniers followers
 			print "Follow back"
@@ -156,11 +167,15 @@ if __name__ == "__main__":
 						follower.follow()
 					except tweepy.error.TweepError:pass
 			
+			
 			#Définition du temps d'attente et second temps d'attente
 			print display_time() + " - Time before tweeting : " + 
 				time_dilatation[nb_dms]
+				
 			sleep(time_dilatation[nb_dms])
 			
+			
+			#Actualisation de la liste des dms
 			try:
 #				dms = api.direct_messages(first_dm_id) #A utiliser pour purge 
 														#régulière de la liste.
@@ -178,8 +193,10 @@ if __name__ == "__main__":
 
 			except tweepy.error.TweepError:pass
 			
+			#Filtrage de la liste de dm
 			dms = parsing_dm_list(dms)
-			flag = True
+			
+			flag = True		#Voir bug en début de cycle
 		except IndexError:pass
 	
 	
