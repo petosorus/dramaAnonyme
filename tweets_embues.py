@@ -73,8 +73,8 @@ def display_time():
 	
 def logging_tweets(dm):
 	f = open("tweets.log", 'a')
-	f.write(dm.text.encode('utf-8') + "\t" + 
-		dm.sender.screen_name.encode('utf-8') + "\t" + display_time())
+	f.write(display_time() + dm.sender.screen_name.encode('utf-8') + "\t" + 
+		dm.text.encode('utf-8') + "\t" + "\n")
 	f.close()
 	
 def erasing_last_dm_batch(last_dm_id):
@@ -111,12 +111,12 @@ if __name__ == "__main__":
 				print "Picking dm"
 				picked_dm = dms[randrange(nb_dms)]
 				
+				print picked_dm.text
+				api.update_status(picked_dm.text)
+				
 				logging_tweets(picked_dm)	
 				dms.remove(picked_dm)
 				api.destroy_direct_message(picked_dm.id)
-				
-				print picked_dm.text
-				api.update_status(picked_dm.text)
 				
 				last_dm_id = dms[nb_dms - 1].id
 				first_dm_id = last_dm_id
