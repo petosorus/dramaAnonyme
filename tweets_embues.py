@@ -90,6 +90,15 @@ if __name__ == "__main__":
 	dms = api.direct_messages()
 	dms = parsing_dm_list(dms)
 	#first_dm_id = dms[0].id
+	time_dilatation = { 0 : 1800,
+						1 : 900,
+						2 : 600,
+						3 : 600,
+						4 : 450,
+						5 : 450,
+						6 : 300,
+						7 : 200,
+						8 : 150 }
 
 	while 1:
 		try:
@@ -110,7 +119,7 @@ if __name__ == "__main__":
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
-			sleep(600)
+			sleep(time_dilatation[len(dms)])
 		
 		
 			print "Follow back"
@@ -122,7 +131,7 @@ if __name__ == "__main__":
 					except tweepy.error.TweepError:pass
 			
 			print "sleeping before tweeting : " + display_time()
-			sleep(600)
+			sleep(time_dilatation[len(dms)])
 			
 			try:
 				#dms = api.direct_messages(first_dm_id)
@@ -132,7 +141,7 @@ if __name__ == "__main__":
 			#	except NameError:
 			#		last_dm_id = first_dm_id
 				dms = parsing_dm_list(dms)
-				
+
 			except tweepy.error.TweepError:pass
 		except IndexError:pass
 	
