@@ -102,11 +102,13 @@ if __name__ == "__main__":
 
 	while 1:
 		try:
-			print "Nb de DM : " + str(len(dms))
+		
+			nb_dms = len(dms)
+			print "Nb de DM : " + str(nb_dms)
 			
-			if len(dms) != 0:
+			if nb_dms != 0:
 				print "Picking dm"
-				picked_dm = dms[randrange(len(dms))]
+				picked_dm = dms[randrange(nb_dms)]
 				
 				logging_tweets(picked_dm)	
 				dms.remove(picked_dm)
@@ -115,11 +117,13 @@ if __name__ == "__main__":
 				print picked_dm.text
 				api.update_status(picked_dm.text)
 				
-				last_dm_id = dms[len(dms) - 1].id
+				last_dm_id = dms[nb_dms - 1].id
 				first_dm_id = last_dm_id
 
 			print "sleeping before following : " + display_time()
-			sleep(time_dilatation[len(dms)])
+			if nb_dms >= 8:
+				nb_dms = 8
+			sleep(time_dilatation[nb_dms])
 		
 		
 			print "Follow back"
@@ -131,7 +135,7 @@ if __name__ == "__main__":
 					except tweepy.error.TweepError:pass
 			
 			print "sleeping before tweeting : " + display_time()
-			sleep(time_dilatation[len(dms)])
+			sleep(time_dilatation[nb_dms])
 			
 			try:
 				#dms = api.direct_messages(first_dm_id)
