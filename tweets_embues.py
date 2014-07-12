@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
 			if nb_dms >= 8:
 				nb_dms = 8
-			print display_time() + " - Time before following : " + time_dilatation[nd_dms]
+			print display_time() + " - Time before following : " + time_dilatation[nb_dms]
 			sleep(time_dilatation[nb_dms])
 		
 		
@@ -136,7 +136,7 @@ if __name__ == "__main__":
 						follower.follow()
 					except tweepy.error.TweepError:pass
 			
-			print display_time() + " - Time before tweeting : " + time_dilatation[nd_dms]
+			print display_time() + " - Time before tweeting : " + time_dilatation[nb_dms]
 			sleep(time_dilatation[nb_dms])
 			
 			try:
