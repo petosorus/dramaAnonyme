@@ -121,9 +121,10 @@ if __name__ == "__main__":
 				last_dm_id = dms[nb_dms - 1].id
 				first_dm_id = last_dm_id
 
-			print "sleeping before following : " + display_time()
+
 			if nb_dms >= 8:
 				nb_dms = 8
+			print display_time() + " - Time before following : " + time_dilatation[nd_dms]
 			sleep(time_dilatation[nb_dms])
 		
 		
@@ -135,7 +136,7 @@ if __name__ == "__main__":
 						follower.follow()
 					except tweepy.error.TweepError:pass
 			
-			print "sleeping before tweeting : " + display_time()
+			print display_time() + " - Time before tweeting : " + time_dilatation[nd_dms]
 			sleep(time_dilatation[nb_dms])
 			
 			try:
