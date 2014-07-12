@@ -89,7 +89,7 @@ if __name__ == "__main__":
 	api = twitter_authentification(cur_dir + "/keys.conf")
 	dms = api.direct_messages()
 	dms = parsing_dm_list(dms)
-	first_dm_id = dms[0].id
+	#first_dm_id = dms[0].id
 
 	while 1:
 		try:
@@ -125,11 +125,12 @@ if __name__ == "__main__":
 			sleep(600)
 			
 			try:
-				dms = api.direct_messages(first_dm_id)
-				try:
-					erasing_last_dm_batch(last_dm_id)
-				except NameError:
-					last_dm_id = first_dm_id
+				#dms = api.direct_messages(first_dm_id)
+				dms = api.direct_messages()				
+			#	try:
+			#		erasing_last_dm_batch(last_dm_id)
+			#	except NameError:
+			#		last_dm_id = first_dm_id
 				dms = parsing_dm_list(dms)
 				
 			except tweepy.error.TweepError:pass
