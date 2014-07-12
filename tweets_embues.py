@@ -99,14 +99,15 @@ if __name__ == "__main__":
 						6 : 300,
 						7 : 200,
 						8 : 150 }
-
+	flag = True
 	while 1:
 		try:
 		
 			nb_dms = len(dms)
 			print "Nb de DM : " + str(nb_dms)
 			
-			if nb_dms != 0:
+			if nb_dms != 0 and flag:
+				flag = False
 				print "Picking dm"
 				picked_dm = dms[randrange(nb_dms)]
 				
@@ -147,6 +148,7 @@ if __name__ == "__main__":
 				dms = parsing_dm_list(dms)
 
 			except tweepy.error.TweepError:pass
+			flag = True
 		except IndexError:pass
 	
 	
