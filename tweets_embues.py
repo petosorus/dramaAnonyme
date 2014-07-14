@@ -152,8 +152,7 @@ if __name__ == "__main__":
 			#Définition du temps d'attente et premier temps d'attente
 			if nb_dms >= 8:
 				nb_dms = 8
-			print display_time() + " - Time before following : " + 
-				time_dilatation[nb_dms]
+			print display_time() + " - Time before following : " + time_dilatation[nb_dms]
 				
 			sleep(time_dilatation[nb_dms])
 		
@@ -169,8 +168,7 @@ if __name__ == "__main__":
 			
 			
 			#Définition du temps d'attente et second temps d'attente
-			print display_time() + " - Time before tweeting : " + 
-				time_dilatation[nb_dms]
+			print display_time() + " - Time before tweeting : " + time_dilatation[nb_dms]
 				
 			sleep(time_dilatation[nb_dms])
 			
