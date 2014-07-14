@@ -138,7 +138,7 @@ if __name__ == "__main__":
 				
 				#Envoi du tweet
 				print picked_dm.text
-				api.update_status(picked_dm.text)
+				api.update_status(picked_dm.text.encode('utf-8'))
 				
 				logging_tweets(picked_dm)	
 				dms.remove(picked_dm)	#Redondance si jamais aucune liste 
