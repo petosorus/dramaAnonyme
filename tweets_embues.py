@@ -117,6 +117,8 @@ if __name__ == "__main__":
 						8 : 150 }
 	flag = True
 	
+	followers = api.followers()
+
 	#Boucle principale
 	while 1:			#Mr Fantastic Infinite Loop
 		try:
@@ -155,7 +157,12 @@ if __name__ == "__main__":
 			print display_time() + " - Time before following : " + str(time_dilatation[nb_dms])
 				
 			sleep(time_dilatation[nb_dms])
-		
+			
+			#Unfollow back
+			print "Unfollow back"
+			for follower in follower:
+				if not follower.following and not follower.follow_request_sent:
+					follower.unfollow()
 		
 			#Follow back des derniers followers
 			print "Follow back"
