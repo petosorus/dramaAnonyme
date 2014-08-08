@@ -71,6 +71,8 @@ def parsing_dm_list(dm_list):
 	for dm in dm_list:
 		if not is_direct_mention(dm.text) and not contains_link(dm.text):
 			dm_list_copy.append(dm)
+		else:
+			dm.destroy()
 	return dm_list_copy
 
 	
@@ -89,7 +91,7 @@ def logging_tweets(dm):
 def erasing_last_dm_batch(last_dm_id):
 	old_dms = api.direct_messages(0, last_dm_id)
 	for dm in old_dms:
-		api.destroy_direct_message(dm.id)
+		dm.destroy()
 
 
 
